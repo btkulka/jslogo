@@ -2,6 +2,7 @@
     <head>
         <!-- Inspiringapps Challenge -->
         <script src="./js/index.js" type="js"></script>
+        <link rel="stylesheet" type="text/css" href="style/custom.css"/>
 
         <!-- Bootstrap -->
         <script src="../node_modules/bootstrap/js/src/index.js"></script>
@@ -10,9 +11,36 @@
         <!-- Meta -->
         <title>Ben Kulka - Inspiringapps Challenge</title>
     </head>
-    <body>
-        <canvas id="mainCanvas">
+    <body class="cstm_background">
+    <div class="container-fluid p-3">
+        <div class="row" style="height:15%;">
+            <div class="col-12">
+                <!-- Greeting -->
+                <h1>Inspiringapps Logo Challenge <small class="cstm_secondary"> | Ben Kulka</small></h1>
+                <p>Drag the dots below into their correct positions. We'll keep you notified of how many are in the correct position as time goes on.</p>
+                <hr/>
+            </div>
+        </div>
+        <div class="row" style="height:75%;">
+            <div class="col-xs-12 col-sm-3 d-flex justify-content-center align-middle">
+                <div id="cstm_feed">
+                    <!-- Feed -->
+                    <h5>Feed</h5>
+                    <hr class="cstm_whitebar"/>
+                    <div class="cstm_scrollbox">
+                        <ul id="feed-list">
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9 d-flex justify-content-center align-middle">
+                <!-- Workspace -->
+                <canvas id="cstm_mainCanvas">
 
-        </canvas>
+                </canvas>
+            </div>
+        </div> 
+    </div>       
     </body>
 </html>

@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "Oswald";
+    src: url("./fonts/Oswald-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Oswald Bold";
+    src: url("./fonts/Oswald-Bold.ttf");
+}
+
+html {
+    font-family: "Oswald", Helvetica, sans-serif;
+}
+
+.cstm_background {
+    position: absolute;
+    background-image: linear-gradient(#ffffff, #b0e0e6);
+    width: 100%;
+}
+
+.cstm_background h1 {
+    color: #5D5F71;
+    font-family: "Oswald Bold", Helvetica, sans-serif
+}
+
+.cstm_background p {
+    color: #2b2c34;
+    font-family: "Oswald", Arial, Helvetica, sans-serif;
+}
+
+.cstm_whitebar {
+    border: 1px solid white;
+}
+
+.cstm_secondary {
+    color: #6C969D;
+}
+
+.cstm_scrollbox {
+    overflow-y: scroll;
+}
+
+#cstm_feed {
+    color: #e1e5e5;
+    background-color: rgba(0,0,0,0.5);
+    height: 95%;
+    width: 90%;
+    padding: 3%;
+}
+
+#cstm_mainCanvas {
+    width: 95%;
+    height: 95%;
+    background-color: #e4ebed;
+}
+
+#feed-list {
+    list-style-type: square;
+    height: 85%;
+}
