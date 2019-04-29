@@ -1,5 +1,6 @@
 // static variables ============================
 var FEED = [];
+var IMGS = [];
 
 // static functions ============================
 function addToFeed(message, type = "basic"){
@@ -10,13 +11,21 @@ function addToFeed(message, type = "basic"){
         bullet.addClass("text-danger");
     }
 
-    $("#feed-list").append(bullet)
+    FEED.unshift(bullet)
 }
 
 // logic =======================================
 
 // Initialize
 $(document).ready(function(){
+
+    // set up listeners
+    $(FEED).onchange(function(){
+        
+    })
+
+    // load images
+   
 
     // Begin list
    addToFeed("Began application. Good luck!");

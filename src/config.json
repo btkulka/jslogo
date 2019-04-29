@@ -1,0 +1,9 @@
+{
+    "logo": "./imgs/ia-logo-back.png",
+    "dots": {
+        "black":"./imgs/ia-logo-dot-black.png",
+        "blue":"../imgs/ia-logo-dot-blue.png",
+        "green":"../imgs/ia-logo-dot-green.png",
+        "red":"../imgs/ia-logo-dot-red.png"
+    }
+}
