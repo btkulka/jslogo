@@ -1,6 +1,8 @@
+'use strict';
+
 // static variables ============================
 var FEED = [];
-
+var CONFIG = fs.
 // static functions ============================
 function addToFeed(message, type = "basic"){
 
