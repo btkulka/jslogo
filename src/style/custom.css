@@ -18,7 +18,7 @@ html {
     width: 100%;
 }
 
-.cstm_background h1 {
+.cstm_background h1, h5 {
     color: #5D5F71;
     font-family: "Oswald Bold", Helvetica, sans-serif
 }
@@ -37,7 +37,8 @@ html {
 }
 
 .cstm_scrollbox {
-    overflow-y: scroll;
+    overflow-y: auto;
+    direction: rtl;
 }
 
 #cstm_feed {
@@ -48,13 +49,20 @@ html {
     padding: 3%;
 }
 
+#cstm_feed h5 {
+    color: #e1e5e5;
+    font-family: "Oswald Bold", Helvetica, sans-serif
+}
+
 #cstm_mainCanvas {
     width: 95%;
-    height: 95%;
+    min-height: 500px;
+    max-height: 95%;
     background-color: #e4ebed;
 }
 
 #feed-list {
     list-style-type: square;
-    height: 85%;
+    min-height: 500px;
+    max-height: 85%;
 }
