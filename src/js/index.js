@@ -8,10 +8,18 @@ var CONFIG = {                                             // all hardcoded valu
         {"color":"blue", "src": "../imgs/ia-logo-dot-blue.png"},
         {"color":"green", "src": "../imgs/ia-logo-dot-green.png"},
         {"color":"red", "src": "../imgs/ia-logo-dot-red.png"}
+    ],
+    "slots": [
+        {"x": 190, "y": 383, "color": "green"},
+        {"x": 90, "y": 237, "color": "black"},
+        {"x": 500, "y": 115, "color": "red"},
+        {"x": 463, "y": 333, "color": "black"},
+        {"x": 320, "y": 95, "color": "blue"}
     ]
 };
 
-var DOTS = [];                                             // our array of Dot objects
+var DOTS = [];                                              // our array of Dot objects
+var SLOTS = [];                                             // our array of Slot objects
 
 // UI functionality ============================
 
@@ -72,14 +80,15 @@ $(document).ready(function(){
     CONFIG.height = workspace.height();
     CONFIG.logoSize = CONFIG.height;
     CONFIG.dotSize = CONFIG.logoSize * (86 / 600);    // ratio of dots to logo currently
+    CONFIG.ratio = CONFIG.logoSize / 600;
 
     var dotShelf = $("<div class='row d-flex justify-content-between' style='min-width:" + CONFIG.logoSize + "px; max-width:" + CONFIG.logoSize + "px'></div>");
     workspace.append(dotShelf);
     
     // Load images
     $(CONFIG.dots).each(function(){
-        
-        var d = new Dot(this.color, this.src);
+
+        var d = new Dot(this.color, this.src, CONFIG.dotSize);
 
         dotShelf.append(d.print(CONFIG.dotSize));
         DOTS.push(d);
@@ -94,6 +103,13 @@ $(document).ready(function(){
 
     var logoWrapper = $("<div class='row d-flex justify-content-between mt-1' style='min-width:" + CONFIG.logoSize + "px; max-width:" + CONFIG.logoSize + "px'></div>");
     workspace.append(logoWrapper);
-    logoWrapper.append("<img src='" + CONFIG.logo + "' style='height:" + CONFIG.logoSize + "px; width:" + CONFIG.logoSize + "px;'/>");
+    logoWrapper.append("<img src='" + CONFIG.logo + "' style='position: absolute; height:" + CONFIG.logoSize + "px; width:" + CONFIG.logoSize + "px;' z-index: 0;/>");
+
+    // append slots
+    $(CONFIG.slots).each(function(){
+        var s = new Slot(CONFIG.ratio, this.color, this.x, this.y);
+        SLOTS.push(s);
+        logoWrapper.append(s.print());
+    });
 
 });
