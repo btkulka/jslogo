@@ -12,36 +12,56 @@
         <!-- Meta -->
         <title>Ben Kulka - InspiringApps Challenge</title>
     </head>
-    <body class="cstm_background">
-    <div class="container-fluid p-3">
-        <div class="row">
-            <div class="col-12">
-                <!-- Greeting -->
-                <h1>InspiringApps Logo Challenge <small class="cstm_secondary"> | Ben Kulka</small></h1>
-                <p>Drag the dots below into their correct positions. We'll keep you notified of how many are in the correct position as time goes on.</p>
-                <hr/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-2 d-flex justify-content-end align-middle p-0">
-                <div id="cstm_feed">
-                    <!-- Feed -->
-                    <h5>Feed</h5>
-                    <hr class="cstm_whitebar"/>
-                    <div class="cstm_scrollbox">
-                        <ul id="feed-list">
-                            
-                        </ul>
+    <body>
+        <div class="cstm_background">
+            <div class="container-fluid p-3" style="height:100%;">
+                <div class="row" style="height:100%;">
+                    <div class="col-sm-4 col-xs-12">
+                            <div class="col-12">
+                                <!-- Greeting -->
+                                <h2>InspiringApps Logo Challenge</h1>
+                                <h4 class="cstm_secondary">Ben Kulka</h4>
+                                <p>Drag the dots below into their correct positions on the logo.</p>
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item cstm_secondary" onclick="SwapViews(this)">
+                                        <a id="basic-pill" class="nav-link active" href="#">Basic</a>
+                                    </li>
+                                    <li class="nav-item cstm_secondary" onclick="SwapViews(this)">
+                                        <a id="canvas-pill" class="nav-link" href="#">Canvas</a>
+                                    </li>
+                                </ul>
+                                <hr/>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center align-middle p-0">
+                                <div id="cstm_feed">
+                                    <!-- Feed -->
+                                    <button class="btn btn-danger">
+                                        Reset
+                                    </button>
+                                    <br/>
+                                    <hr class="cstm_whitebar mt-3"/>
+                                    <div class="cstm_scrollbox">
+                                        <ul id="feed-list">
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-10 d-flex justify-content-beginning align-middle p-0">
-                <!-- Workspace -->
-                <canvas id="cstm_mainCanvas">
+                    <div id="basicCol" class="col-xs-12 col-sm-8 d-flex">
+                        <!-- Basic Workspace -->
+                        <div id="basicWorkspace">
 
-                </canvas>
-            </div>
+                        </div>
+                    </div>
+                    <div id="canvasCol" class="col-xs-12 col-sm-8 d-none">
+                        <!-- HTML5 Canvas Workspace -->
+                        <canvas id="cstm_mainCanvas">
+
+                        </canvas>
+                    </div>       
+                </div> 
+            </div>      
         </div> 
-    </div>       
     </body>
 </html>
