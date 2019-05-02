@@ -90,4 +90,10 @@ li.cstm_secondary a.active {
 
 #feed-list {
     list-style-type: square;
+    overflow-y: scroll;
+    max-height: 30vh;
+}
+
+.data_slot {
+    background-color: rgba(0,0,0,0);
 }
