@@ -1,5 +1,4 @@
 // static variables ============================
-var CANVAS = document.getElementById("cstm_mainCanvas");   // our canvas object
 var CONFIG = {                                             // all hardcoded values will live in this json CONFIG object
     "logo": "../imgs/ia-logo-back.png",
     "padding": 10,
@@ -53,6 +52,9 @@ function SwapViews(pill){
                 .removeClass("d-none")
                 .fadeIn();
             addToFeed("Swapping to canvas solution...");
+            if(!cvsSTARTED){
+                cvs_start();
+            }
         }
         navlink.addClass("active");
     }
