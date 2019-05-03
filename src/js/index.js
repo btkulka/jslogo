@@ -141,6 +141,7 @@ function initialize(){
     CONFIG.logoSize = CONFIG.height;
     CONFIG.dotSize = CONFIG.logoSize * (86 / 600);    // ratio of dots to logo currently
     CONFIG.ratio = CONFIG.logoSize / 600;
+    CONFIG.workspaceWidth = workspace.width();        // used for our canvas solution
 
     loadImages();
 }
