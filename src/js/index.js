@@ -70,6 +70,10 @@ function reset(){
     CORRECT_COUNT = 0;
     $("#basicWorkspace").empty();
     loadImages();
+
+    if(cvsSTARTED){
+        cvsReset();
+    }
 }
 
 // adds a message to the feed. Passing "error" as second param paints text red
