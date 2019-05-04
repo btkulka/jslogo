@@ -101,65 +101,75 @@ function cvs_start(){
         }
     });
 
+    // prevent multiple mouseup calls
+    $(document).ready(function () {
+        $("*").mouseup(function (e) {
+            e.stopPropagation();
+        });
+    });
+
     $(CANVAS).on("mouseup", function(event){
         // do logic to ensure it's in the right spot and not overlapping dots, then draw and lock
-        cvsMouseDragging = false;
-        var rect = CANVAS.getBoundingClientRect();
-        var dragEl = ELEMENTS[cvsMouseElementIndex];
+        if(cvsMouseDragging){
+            cvsMouseDragging = false;
+            var rect = CANVAS.getBoundingClientRect();
+            var dragEl = ELEMENTS[cvsMouseElementIndex];
 
-        // ensure we are not touching a dot
-        for(var i = 0; i < ELEMENTS.length; i++){
-            if(isWithinElementBounds(ELEMENTS[i], event.clientX - rect.left, event.clientY - rect.top) && ELEMENTS[i].elData.type == "dot"){
-                addToFeed("A dot cannot be dropped on another dot!", "error");
+            // ensure we are not touching a dot
+            for(var i = 0; i < ELEMENTS.length; i++){
+                if(cvsMouseElementIndex != i && isWithinElementBounds(ELEMENTS[i], event.clientX - rect.left, event.clientY - rect.top) && ELEMENTS[i].elData.type == "dot"){
+                    addToFeed("A dot cannot be dropped on another dot!", "error");
+                    resetDot();
+                    return -1; // exit
+                }
+            }
+
+            // ensure the drop spot has a slot for the dot 
+            var slot = null;
+            for(var i = 0; i < cvsSLOTS.length; i++){
+                if(isWithinElementBounds(cvsSLOTS[i], event.clientX - rect.left, event.clientY - rect.top)){
+                    slot = cvsSLOTS[i];
+                }
+            }
+
+            if(slot == null){
+                addToFeed("The dot has to be dropped in an open white space on the logo!", "error");
                 resetDot();
-                return -1; // exit
+                return -1;  // exit
             }
-        }
 
-        // ensure the drop spot has a slot for the dot 
-        var slot = null;
-        for(var i = 0; i < cvsSLOTS.length; i++){
-            if(isWithinElementBounds(cvsSLOTS[i], event.clientX - rect.left, event.clientY - rect.top)){
-                slot = cvsSLOTS[i];
-            }
-        }
+            // right color?
+            if(dragEl.elData.color == slot.color){
+                cvsCORRECT_COUNT = cvsCORRECT_COUNT + 1;
+                if(cvsCORRECT_COUNT != 5){
+                    // update dot and lock it
+                    dragEl.elData.currX = slot.elData.currX;
+                    dragEl.elData.currY = slot.elData.currY;
+                    dragEl.elData.locked = true;
+                    ELEMENTS[cvsMouseElementIndex] = dragEl;
+                    cvsMouseElementIndex = -1;  // reset index
+                    drawCanvas();
 
-        if(slot == null){
-            addToFeed("The dot has to be dropped in an open white space on the logo!", "error");
-            resetDot();
-            return -1;  // exit
-        }
-
-        // right color?
-        if(dragEl.elData.color == slot.color){
-            cvsCORRECT_COUNT = cvsCORRECT_COUNT + 1;
-            if(cvsCORRECT_COUNT != 5){
-                // update dot and lock it
-                dragEl.elData.currX = slot.x;
-                dragEl.elData.currY = slot.y;
-                dragEl.elData.locked = true;
-                ELEMENTS[cvsMouseElementIndex] = dragEl;
-                cvsMouseElementIndex = -1;  // reset index
-                drawCanvas();
-
-                addToFeed("Correct! " + (5 - cvsCORRECT_COUNT) + " dots left to go!");
+                    addToFeed("Correct! " + (5 - cvsCORRECT_COUNT) + " dots left to go!");
+                }else{
+                    win();
+                    return 1;
+                }
             }else{
-                win();
+                addToFeed("Wrong color! Try again.", "error");
+                resetDot();
+                return -1;
             }
-        }else{
-            addToFeed("Wrong color! Try again.", "error");
-            resetDot();
-            return -1;
         }
-
     });
     
     // Draw images
     var context = CANVAS.getContext("2d");
+    var rect = CANVAS.getBoundingClientRect();
 
     var logo = new Image();
     logo.src = CONFIG.logo;
-    logo.elData = {type: "logo", orgX: cvsPadding, orgY: cvsDotSize+ ( 2 * cvsPadding), size: cvsLogoSize };
+    logo.elData = {type: "logo", orgX: cvsPadding, orgY: cvsDotSize + ( 2 * cvsPadding), size: cvsLogoSize };
     // current coordinates set to original coordinates 
     logo.elData.currX = logo.elData.orgX;
     logo.elData.currY = logo.elData.orgY;
@@ -172,9 +182,14 @@ function cvs_start(){
     // set slots
     for(var i = 0; i < CONFIG.slots.length; i++){
         var slot = CONFIG.slots[i];
-        slot.x = (slot.x * cvsRatio) + logo.elData.orgX;
-        slot.y = (slot.y * cvsRatio) + logo.elData.orgY;
-        slot.size = cvsDotSize;
+        var slotRatio = logo.elData.size / 600;
+
+        // have to set elData for bounding checks
+        slot.elData = { size: cvsDotSize,
+                        currX: (slot.x * slotRatio + logo.elData.orgX),
+                        currY: (slot.y * slotRatio + logo.elData.orgY)
+                    };
+
         cvsSLOTS.push(slot);
     }
 
