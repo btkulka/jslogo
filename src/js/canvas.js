@@ -52,6 +52,7 @@ function cvsReset(){
         var el = ELEMENTS[i];
         el.elData.currX = el.elData.orgX;
         el.elData.currY = el.elData.orgY;
+        el.elData.locked = false;
         ELEMENTS[i] = el;
     }
 
